@@ -1,0 +1,18 @@
+.add-card {
+  /* max-width: 60rem;
+    width: 90%;
+    margin: 2rem auto; */
+  animation: shows-appear 1s ease-out forwards;
+}
+
+@keyframes shows-appear {
+  from {
+    opacity: 0;
+    transform: translateY(3rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
