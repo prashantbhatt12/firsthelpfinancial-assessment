@@ -17,7 +17,7 @@ function App() {
       <Header onShowCart={showCartHandler}></Header>
       <main>
         <Shows></Shows>
-        {/* <Checkout></Checkout> */}
+        <Checkout></Checkout>
       </main>
     </Fragment>
   );
