@@ -33,6 +33,7 @@ const TopSellingShows = () => {
     return (
       <ShowItem
         key={show.id}
+        id = {show.id}
         name={show.name}
         description={show.description}
         price={show.price}

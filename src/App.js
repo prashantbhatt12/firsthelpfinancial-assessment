@@ -3,6 +3,7 @@ import Checkout from "./components/Checkout/Checkout";
 import Header from "./components/Layout/Header";
 import Shows from "./components/Shows/Shows";
 import Cart from "./components/Cart/Cart";
+import CartProvider from "./store/CartProvider";
 function App() {
   const [cartIsShown, setCartIsShown] = useState(false);
   const showCartHandler = () => {
@@ -12,14 +13,14 @@ function App() {
     setCartIsShown(false);
   };
   return (
-    <Fragment>
+    <CartProvider>
       {cartIsShown && <Cart onClose={hideCartHandler}></Cart>}
       <Header onShowCart={showCartHandler}></Header>
       <main>
         <Shows></Shows>
-        <Checkout></Checkout>
+        {/* <Checkout></Checkout> */}
       </main>
-    </Fragment>
+    </CartProvider>
   );
 }
 

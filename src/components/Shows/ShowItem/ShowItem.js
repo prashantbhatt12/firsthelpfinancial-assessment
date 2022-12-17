@@ -1,8 +1,20 @@
 import classes from "./ShowItem.module.css";
 import ShowItemForm from "./ShowItemForm";
+import CartContext from "../../../store/cart-context";
+import { useContext } from "react";
 // import { show1 } from "../../Images/Images";
 const ShowItem = (props) => {
+  const cartCtx = useContext(CartContext);
   const price = `$${props.price.toFixed(2)}`;
+  const addToCartHandler  = (quantity,date) =>{
+    cartCtx.addItem({
+      id:props.id,
+      name:props.name,
+      quantity:quantity,
+      price:props.price,
+      date:date
+    })
+  }
   return (
     <li className={classes.show}>
       {/* <div>
@@ -20,7 +32,7 @@ const ShowItem = (props) => {
         <div className={classes.price}>{price}</div>
       </div>
       <div>
-        <ShowItemForm></ShowItemForm>
+        <ShowItemForm onAddToCart={addToCartHandler}></ShowItemForm>
       </div>
     </li>
   );
