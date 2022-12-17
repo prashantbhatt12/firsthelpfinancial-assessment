@@ -4,6 +4,7 @@ import Header from "./components/Layout/Header";
 import Shows from "./components/Shows/Shows";
 import Cart from "./components/Cart/Cart";
 import CartProvider from "./store/CartProvider";
+import { Route, Routes } from "react-router-dom";
 function App() {
   const [cartIsShown, setCartIsShown] = useState(false);
   const showCartHandler = () => {
@@ -17,8 +18,10 @@ function App() {
       {cartIsShown && <Cart onClose={hideCartHandler}></Cart>}
       <Header onShowCart={showCartHandler}></Header>
       <main>
-        <Shows></Shows>
-        {/* <Checkout></Checkout> */}
+        <Routes>
+          <Route path="/checkout" element={<Checkout />} exact></Route>
+          <Route path="/" element={<Shows />} exact></Route>
+        </Routes>
       </main>
     </CartProvider>
   );

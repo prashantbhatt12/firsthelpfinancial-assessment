@@ -1,16 +1,21 @@
-import { Fragment, useState } from "react";
+import { Fragment, useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import Card from "../UI/Card";
 import AddCardForm from "./AddCardForm";
 import classes from "./Checkout.module.css";
+import CartContext from "../../store/cart-context";
+import CheckoutItem from "./CheckoutItem";
 const Checkout = () => {
   const [cardSwitchFlag, setCardSwitchFlag] = useState(false);
   const [showAddCardForm, setShowAddCardForm] = useState(false);
-
+  const cartCtx = useContext(CartContext);
   return (
-    <div className="container rounded bg-white">
+    <div
+      className="container rounded bg-white"
+      style={{ "margin-top": "100px" }}
+    >
       <div className="row d-flex justify-content-center pb-5">
-        <div className="col-sm-5 col-md-5 ml-1">
+        <div className="col-sm-5 col-md-5 ml-1 mt-8">
           <div className="py-4 d-flex flex-row">
             <h4>
               <i className="fa fa-check" style={{ color: "green" }}></i>{" "}
@@ -26,7 +31,7 @@ const Checkout = () => {
               </p>
             </div>
           </div>
-          <p>Tickets Available by Sun Dec 18, 2022</p>
+          <p>Tickets Available by Mon Dec 19, 2022</p>
           <div className="rounded bg-light d-flex">
             <div className="p-2">
               These mobile tickets will be transferred directly to you from a
@@ -117,14 +122,14 @@ const Checkout = () => {
         <div className="col-sm-3 col-md-4 offset-md-1 mobile">
           <div className="py-4 d-flex justify-content-end">
             <h6>
-              <Link to="/about">Cancel and return to homepage</Link>
+              <Link to="/">Cancel and return to homepage</Link>
             </h6>
           </div>
           <div className="bg-light rounded d-flex flex-column">
             <div className="p-2 ml-3">
               <h4>Order Recap</h4>
             </div>
-            <div className="p-2 d-flex">
+            {/* <div className="p-2 d-flex">
               <div className="col-8">Contracted Price</div>
               <div className="ml-auto">$186.76</div>
             </div>
@@ -168,14 +173,22 @@ const Checkout = () => {
               <div className="ml-auto">
                 <b>$71.76</b>
               </div>
-            </div>
+            </div> */}
+            {cartCtx.items.map((item) => (
+              <CheckoutItem
+                key={item.id}
+                name={item.name}
+                price={item.price}
+                quantity={item.quantity}
+              ></CheckoutItem>
+            ))}
             <div className="border-top px-4 mx-3"></div>
             <div className="p-2 d-flex pt-3">
               <div className="col-8">
                 <b>Total</b>
               </div>
               <div className="ml-auto">
-                <b className="green">$85.00</b>
+                <b className="green">${cartCtx.totalAmount.toFixed(2)}</b>
               </div>
             </div>
             <div>
